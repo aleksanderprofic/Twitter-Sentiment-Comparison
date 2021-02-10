@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Twitter Sentiment Comparison Tool</title>
+</head>
+<body>
+<div class="header">
+    <h1>SENTIMENT COMPARISON</h1>
+</div>
+<div id="content">
+    <div id="subtitle">
+        <p>Have you ever wondered if Batman is more likeable than Spiderman?</p>
+        <p>Which of them humanity likes more?</p>
+        <p>See for yourself below!</p>
+    </div>
+    <table class="table">
+        <tr>
+            <td>
+                <p align="center">Give me few keywords (at least one) separated by comma that I could analyze for you &#129488;</p>
+                <form onsubmit="loading();" id="form" action="/sentiment/" method="POST">
+                    <input required class="input" type="text" name="keywords" id="keywords" placeholder="keyword1, keyword2...">
+                    <input class="input" type="submit" value="Submit">
+                </form>
+            </td>
+            <td align="center" width="{{width}}" height="{{height}}" class="visualisation">
+                <div id="loading"></div>
+                {% if image is defined %}
+                    <img id="image" src="data:image/png;base64,{{image}}"/>
+                {% elif error == true %}
+                    <p id="error">{{message}}</p>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

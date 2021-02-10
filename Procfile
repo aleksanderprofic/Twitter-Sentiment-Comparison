@@ -1,0 +1,1 @@
+web: gunicorn sentiment_comparison.__main__:app
